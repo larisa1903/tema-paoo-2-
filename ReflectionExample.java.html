@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>ReflectionExample.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ReflectionExample.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">reflect</span><span class="s2">.</span><span class="s1">Field</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">lang</span><span class="s2">.</span><span class="s1">reflect</span><span class="s2">.</span><span class="s1">Method</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">ReflectionExample </span><span class="s2">{</span>
+    <span class="s0">public static void </span><span class="s1">main</span><span class="s2">(</span><span class="s1">String</span><span class="s2">[] </span><span class="s1">args</span><span class="s2">) </span><span class="s0">throws </span><span class="s1">Exception </span><span class="s2">{</span>
+        <span class="s3">// 1. Obținem referința clasei</span>
+        <span class="s1">Class</span><span class="s2">&lt;?&gt; </span><span class="s1">clazz </span><span class="s2">= </span><span class="s1">Persoana</span><span class="s2">.</span><span class="s0">class</span><span class="s2">;</span>
+
+        <span class="s3">// 2. Creăm o instanță a clasei folosind Reflection</span>
+        <span class="s1">Persoana persoana </span><span class="s2">= (</span><span class="s1">Persoana</span><span class="s2">) </span><span class="s1">clazz</span><span class="s2">.</span><span class="s1">getDeclaredConstructor</span><span class="s2">().</span><span class="s1">newInstance</span><span class="s2">();</span>
+
+        <span class="s3">// 3. Accesăm și modificăm câmpul privat &quot;nume&quot;</span>
+        <span class="s1">Field field </span><span class="s2">= </span><span class="s1">clazz</span><span class="s2">.</span><span class="s1">getDeclaredField</span><span class="s2">(</span><span class="s4">&quot;nume&quot;</span><span class="s2">);</span>
+        <span class="s1">field</span><span class="s2">.</span><span class="s1">setAccessible</span><span class="s2">(</span><span class="s0">true</span><span class="s2">); </span><span class="s3">// Permite accesul la câmp privat</span>
+        <span class="s1">field</span><span class="s2">.</span><span class="s1">set</span><span class="s2">(</span><span class="s1">persoana</span><span class="s2">, </span><span class="s4">&quot;Ionel&quot;</span><span class="s2">); </span><span class="s3">// Modifică valoarea</span>
+
+        <span class="s3">// 4. Apelăm metoda privată &quot;afiseazaMesaj&quot;</span>
+        <span class="s1">Method metoda </span><span class="s2">= </span><span class="s1">clazz</span><span class="s2">.</span><span class="s1">getDeclaredMethod</span><span class="s2">(</span><span class="s4">&quot;afiseazaMesaj&quot;</span><span class="s2">);</span>
+        <span class="s1">metoda</span><span class="s2">.</span><span class="s1">setAccessible</span><span class="s2">(</span><span class="s0">true</span><span class="s2">); </span><span class="s3">// Permite accesul la metoda privată</span>
+        <span class="s1">metoda</span><span class="s2">.</span><span class="s1">invoke</span><span class="s2">(</span><span class="s1">persoana</span><span class="s2">); </span><span class="s3">// Apelează metoda</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
