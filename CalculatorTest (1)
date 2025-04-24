@@ -1,0 +1,17 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class CalculatorTest {
+
+    @Test
+    public void testAdunare() {
+        Calculator calc = new Calculator();
+        assertEquals(7, calc.aduna(3, 4));
+    }
+
+    @Test
+    public void testImpartire() {
+        Calculator calc = new Calculator();
+        assertThrows(IllegalArgumentException.class, () -> calc.imparte(10, 0));
+    }
+}
